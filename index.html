@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="菜鸟一枚"/>
+
+
+
+
+  <meta name="keywords" content="Java" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yangxuanx's Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://yangxuanx.github.io/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> yangxuanx's Blog </title>
+  <meta name="generator" content="Hexo 4.2.1"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">yangxuanx's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">yangxuanx's Blog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts">
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2020/05/17/chromium-vaapi%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F/">chromium-vaapi硬件加速</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-05-17
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="硬件加速"><a href="#硬件加速" class="headerlink" title="硬件加速"></a>硬件加速</h3><p>  硬件加速在智能手机上很常见，可以使用手机处理器中的GPU对播放视频进行硬件解码，相比软件解码，耗电低，手机不易发烫。</p>
+<h3 id="Linux下的浏览器"><a href="#Linux下的浏览器" class="headerlink" title="Linux下的浏览器"></a>Linux下的浏览器</h3><p>  众所周知Linux下的Chromium Chrome Firefox都没有开启视频播放硬件加速。得益于Chromium的开源，有人做出了对VA-API支持的chromimu-vaapi，前段时间我已将自己的笔记本重装为Arch Linux，安装chromium-vaapi变得简单。</p>
+<ol>
+<li><p>添加archlinuxcn源，可以选择一个国内镜像，例如163</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo echo &quot;[archlinuxcn]</span><br><span class="line">Server &#x3D; http:&#x2F;&#x2F;mirrors.163.com&#x2F;archlinux-cn&#x2F;$arch&quot; &gt;&gt; &#x2F;etc&#x2F;pacman.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装archlinuxcn的PGP Keys</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装chromium、驱动、检测VA-API工具 ，由于我的笔记本CPU是ADM安装是这样的，Intel可以参照<a href="https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Installation" target="_blank" rel="noopener">ArchlWiki</a>相对应的方法安装必要的驱动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S chromium-vaapi libva-mesa-driver libva-utils</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行vainfo命令，查看输出，VA-API是否工作正常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">vainfo: VA-API version: 1.7 (libva 2.7.1)</span><br><span class="line">vainfo: Driver version: Mesa Gallium driver 20.0.7 for AMD RAVEN (DRM 3.36.0, 5.6.13-arch1-1, LLVM 10.0.0)</span><br><span class="line">vainfo: Supported profile and entrypoints</span><br><span class="line">      VAProfileMPEG2Simple            :	VAEntrypointVLD</span><br><span class="line">      VAProfileMPEG2Main              :	VAEntrypointVLD</span><br><span class="line">      VAProfileVC1Simple              :	VAEntrypointVLD</span><br><span class="line">      VAProfileVC1Main                :	VAEntrypointVLD</span><br><span class="line">      VAProfileVC1Advanced            :	VAEntrypointVLD</span><br><span class="line">      VAProfileH264ConstrainedBaseline:	VAEntrypointVLD</span><br><span class="line">      VAProfileH264ConstrainedBaseline:	VAEntrypointEncSlice</span><br><span class="line">      VAProfileH264Main               :	VAEntrypointVLD</span><br><span class="line">      VAProfileH264Main               :	VAEntrypointEncSlice</span><br><span class="line">      VAProfileH264High               :	VAEntrypointVLD</span><br><span class="line">      VAProfileH264High               :	VAEntrypointEncSlice</span><br><span class="line">      VAProfileHEVCMain               :	VAEntrypointVLD</span><br><span class="line">      VAProfileHEVCMain               :	VAEntrypointEncSlice</span><br><span class="line">      VAProfileHEVCMain10             :	VAEntrypointVLD</span><br><span class="line">      VAProfileJPEGBaseline           :	VAEntrypointVLD</span><br><span class="line">      VAProfileVP9Profile0            :	VAEntrypointVLD</span><br><span class="line">      VAProfileVP9Profile2            :	VAEntrypointVLD</span><br><span class="line">      VAProfileNone                   :	VAEntrypointVideoProc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开chromium，输入chrome://flags，开启<a href="chrome://flags/#ignore-gpu-blacklist">#ignore-gpu-blacklist</a>，开启后会提示重启chromium，重启即可。</p>
+</li>
+<li><p>由于YouTube的视频默认输出为 VP8/VP9，需要安装扩展<a href="https://chrome.google.com/webstore/detail/h264ify/aleakchihdccplidncghkekgioiakgal" target="_blank" rel="noopener">h264ify</a></p>
+</li>
+<li><p>打开 chrome://gpu 查看Video Decode是否为Hardware accelerated，打开YouTube播放一个视频，打开 chrome://media-internals  查看Player Properties 中的video_decoder</p>
+<ul>
+<li>硬件解码: <em>MojoVideoDecoder</em>, <em>GpuVideoDecoder</em>;</li>
+<li>软件解码: <em>VpxVideoDecoder</em>, <em>FFmpegVideoDecoder</em>.</li>
+</ul>
+</li>
+</ol>
+<p>这里描述的相关操作来自于<a href="https://wiki.archlinux.org/index.php/Chromium#Hardware_video_acceleration" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Chromium#Hardware_video_acceleration</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2020/04/01/%E5%88%A9%E7%94%A8mpv%E8%A7%82%E7%9C%8B%E6%96%97%E9%B1%BC%E7%9B%B4%E6%92%AD/">利用mpv观看斗鱼直播</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-04-01
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>​    平日使用Chrome观看斗鱼直播，笔记本电脑风扇全速运转，噪音较大。怀疑斗鱼为了减少自己的CDN的压力而使用了P2P，网页版我不清楚，但是Windows客户端使用了P2P。即使没有，那斗鱼直播网页的广告和花哨的礼物我也不想看。</p>
+<p>​    想到斗鱼直播流是应该可以获取，Google搜索了一下，找到利用一个<a href="http://suo.im/5VtxCj" target="_blank" rel="noopener">油猴脚本</a>获取斗鱼的直播流地址，再加上<a href="https://mpv.io/" target="_blank" rel="noopener">mpv</a>播放器，即可完成不需要Chrome或者<del>客户端</del>(GNU/Linux)的方式观看直播。</p>
+<p>​    现在笔记本使用的Pop!_OS基于Ubuntu，安装最新的mpv命令如下。如果是Arch，AUR库里面有，直接安装即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:mc3man/mpv-tests</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install mpv</span><br></pre></td></tr></table></figure>
+
+<p>​    现在可以使用mpv观看直播啦，例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpv http://tx2play1.douyucdn.cn/live/71415ryinzitv.flv?uuid=</span><br></pre></td></tr></table></figure>
+
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/08/24/Docker%E5%AE%B9%E5%99%A8%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">Docker容器安装MySQL数据库</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-08-24
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>由于操作系统切换为ArchLinux，pacman软件仓库中的MySQL变成了Mariadb，版本为10，平日开发中使用的MySQL版本为5.7，为了后续的开发方便，使用Docker容器安装一个MySQL，操作步骤如下：</p>
+<ol>
+<li><p>Docker拉取5.7版本的MySQL镜像，有的用户需要加sudo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在我用户目录下有个devel文件夹，这个可以自选。执行如下命令，创建mysql文件夹，内部包含三个文件夹，分别是conf：存放配置，data：存放数据，logs：存放日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/devel &amp;&amp; mkdir -p mysql/conf mysql/data mysql/logs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置utf8编码,logbin,东八时区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> \ </span><br><span class="line"><span class="string">'[mysqld]</span></span><br><span class="line"><span class="string">character_set_server = utf8</span></span><br><span class="line"><span class="string">server-id = 1</span></span><br><span class="line"><span class="string">log_bin = /var/lib/mysql/mysql-bin.log</span></span><br><span class="line"><span class="string">default-time_zone = '</span>+8:00<span class="string">'</span></span><br><span class="line"><span class="string">[mysql]</span></span><br><span class="line"><span class="string">default-character-set = utf8</span></span><br><span class="line"><span class="string">[client]</span></span><br><span class="line"><span class="string">default-character-set = utf8'</span> \</span><br><span class="line">&gt;&gt;  ~/devel/mysql/conf/my.cnf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建MySQL容器，挂载配置、数据、日志，绑定端口，设置密码：root，容器名称为：mysql</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/devel/mysql &amp;&amp; \</span><br><span class="line">docker run -p 3306:3306 --name mysql -v <span class="variable">$PWD</span>/conf:/etc/mysql/conf.d -v <span class="variable">$PWD</span>/logs:/var/<span class="built_in">log</span>/mysql -v <span class="variable">$PWD</span>/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用MySQL管理工具，我这里使用的是DBeaver，连接数据库，地址为localhost，用户名密码均为root，测试是否连接正常，连接成功后查看MySQL编码是否为utf8，如果都正常，安装完毕！</p>
+</li>
+<li><p>开机后docker内部容器不会自动启动，需要手动开启MySQL</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start mysql</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/08/23/ArchLinux%E5%85%A8%E5%B1%80%E8%8F%9C%E5%8D%95%E5%BC%80%E5%90%AF/">ArchLinux全局菜单开启</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-08-23
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>最近将自己使用的操作系统由之前的Ubuntu切换到ArchLinux，pacman的好处自然不用说。由于之前使用的桌面环境是xfce4，也有全局菜单，但是xfce4全局菜单组件依赖有内存泄露问题。更换ArchLinux后桌面环境选择了KDE，为了配合KDE下全局菜单使用，需要安装一些依赖，Firefox安装archlinuxcn源下firefox-kde-opensuse，这样Firefox也可以开启全局菜单，依赖包安装执行命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S appmenu-gtk-module libdbusmenu-glib libdbusmenu-gtk3 libdbusmenu-gtk2</span><br></pre></td></tr></table></figure>
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/07/07/Linux%E5%AE%89%E8%A3%85JDK11/">Linux安装JDK11</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-07-07
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​    由于oracle改变了jdk的授权协议，jdk8安全更新也正式进入授权付费模式，而根据授权协议改变后的第一个长      期支持版本（lts）jdk11的免费更新也终止。针对这些，大家可以上网去由oracle推出的<a href="https://openjdk.java.net" target="_blank" rel="noopener">openjdk</a>进行安装。</p>
+<p>​    由于openjdk给出的包只有tar.gz这一种格式，相对来说JDK升级比较费事。市面有第三方维护的比较出名的有：<a href="https://aws.amazon.com/cn/corretto/" target="_blank" rel="noopener">amazon</a>，<a href="https://developers.redhat.com/products/openjdk/download" target="_blank" rel="noopener">redhat</a>，<a href="https://www.azul.com/downloads/zulu/" target="_blank" rel="noopener">azul</a>，目前我使用的jdk是azlu，安装方式除了传统的安装包（deb rpm）的方式，还可以通过添加第三方仓库的方式进行安装，便于jdk升级。</p>
+<h3 id="apt"><a href="#apt" class="headerlink" title="apt"></a>apt</h3><ol>
+<li><p>添加azul公司的公钥到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将azul包添加到apt仓库</p>
+<p>ubuntu</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-add-repository <span class="string">'deb http://repos.azulsystems.com/ubuntu stable main'</span></span><br></pre></td></tr></table></figure>
+
+<p>debian</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-add-repository <span class="string">'deb http://repos.azulsystems.com/debian stable main'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装jdk11</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install zulu-11</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h3><ol>
+<li><p>添加azul公司的公钥到本地</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm --import http://repos.azulsystems.com/RPM-GPG-KEY-azulsystems</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将azul包添加到yum仓库</p>
+<p> RHEL 或者 Oracle Linux</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -o /etc/yum.repos.d/zulu.repo http://repos.azulsystems.com/rhel/zulu.repo</span><br></pre></td></tr></table></figure>
+
+<p>SLES</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo zypper addrepo http://repos.azulsystems.com/sles/latest zulu</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装jdk</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum update</span><br><span class="line">sudo yum install zulu-11</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>​    上面安装的版本是11，如果安装jdk8，改变zulu-8即可。可以在本地安装多个版本，利用<strong>sudo update-alternatives –config java</strong> 对当前电脑的jdk版本进行切换。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/03/21/%E5%88%A0%E9%99%A4%E5%B7%A5%E7%A8%8B%E4%B8%8B-git%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84%E5%A4%A7%E6%96%87%E4%BB%B6/">删除.git下的大文件</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-21
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>今天在准备将之前一个工程文件压缩打包一下，发现压缩时间很长，怀疑工程内部的git版本管理文件夹.git占比大造成的。利用<strong>ncdu</strong>命令进行查看，发现.git文件夹使用了80M，看来是之前提交的一些大的文件造成的，虽然后期那些文件删除了，但是在git版本管理中因为已经提交了几个版本，所以还存在。于是Google如何删除.git中的大文件。</p>
+<hr>
+<h3 id="使用Git命令的方式"><a href="#使用Git命令的方式" class="headerlink" title="使用Git命令的方式"></a><strong>使用Git命令的方式</strong></h3><ol>
+<li><p>进入工程文件夹，开始查看占用最大的5个文件</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rev-list --objects --all | grep <span class="string">"<span class="variable">$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk '&#123;print$1&#125;')</span>"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对查找出的文件进行删除</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git filter-branch --force --index-filter <span class="string">'git rm -rf --cached --ignore-unmatch big-file.jar'</span> --prune-empty --tag-name-filter cat -	- --all</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新提交到远程仓库，然后删除本地文件</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git push origin --force --all</span><br><span class="line">rm -rf .git/refs/original/</span><br><span class="line">git reflog expire --expire=now --all &amp;&amp; git gc --prune=now</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<hr>
+<h3 id="使用工具的方式"><a href="#使用工具的方式" class="headerlink" title="使用工具的方式"></a><strong>使用工具的方式</strong></h3><p>一个由scala编写的工具对git大文件进行清理 <a href="https://rtyley.github.io/bfg-repo-cleaner" target="_blank" rel="noopener">BFG Repo-Cleaner</a></p>
+<ol>
+<li><p>使用–mirror的方式克隆当前的工程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --mirror git://example.com/some-big-repo.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用Java的jar命令启动bfg.jar开始扫描仓库大于20M的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar bfg.jar --strip-blobs-bigger-than 20M some-big-repo.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入–mirror方式克隆的目录，执行清除操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行下面的命令，等待上传到远程仓库完成更新。由于是使用的–mirror的方式克隆的仓库，push操作会提交到所有分支</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p><em>我这里推荐工具的方式进行删除操作，速度快，不易出错。</em></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/03/11/ranger%E7%9A%84%E4%BD%BF%E7%94%A8/">ranger的使用</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-11
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="https://github.com/ranger/ranger" target="_blank" rel="noopener">ranger</a>是一个可以在GNU/Linux终端模拟器中，进行预览文件的一个工具，相当于一个简易的文件管理器，<br>安装最新版本建议使用pip或者pip3，我这里使用的Ubuntu，软件仓库的版本较低，所以使用了pip3进行安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip3 install ranger-fm</span><br></pre></td></tr></table></figure>
+<p>使用sudo安装的好处是在root下也可以使用ranger，安装完成后，可以集成fzf模糊查询，在~/.config/ranger/目录下，新增commands.py，<br>加入如下内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ranger.api.commands <span class="keyword">import</span> Command</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">fzf_select</span><span class="params">(Command)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :fzf_select</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Find a file using fzf.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    With a prefix argument select only directories.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    See: https://github.com/junegunn/fzf</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">execute</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">import</span> subprocess</span><br><span class="line">        <span class="keyword">import</span> os.path</span><br><span class="line">        <span class="keyword">if</span> self.quantifier:</span><br><span class="line">            <span class="comment"># match only directories</span></span><br><span class="line">            command=<span class="string">"find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \</span></span><br><span class="line"><span class="string">            -o -type d -print 2&gt; /dev/null | sed 1d | cut -b3- | fzf +m"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># match files and directories</span></span><br><span class="line">            command=<span class="string">"find -L . \( -path '*/\.*' -o -fstype 'dev' -o -fstype 'proc' \) -prune \</span></span><br><span class="line"><span class="string">            -o -print 2&gt; /dev/null | sed 1d | cut -b3- | fzf +m"</span></span><br><span class="line">        fzf = self.fm.execute_command(command, universal_newlines=<span class="literal">True</span>, stdout=subprocess.PIPE)</span><br><span class="line">        stdout, stderr = fzf.communicate()</span><br><span class="line">        <span class="keyword">if</span> fzf.returncode == <span class="number">0</span>:</span><br><span class="line">            fzf_file = os.path.abspath(stdout.rstrip(<span class="string">'\n'</span>))</span><br><span class="line">            <span class="keyword">if</span> os.path.isdir(fzf_file):</span><br><span class="line">                self.fm.cd(fzf_file)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.fm.select_file(fzf_file)</span><br></pre></td></tr></table></figure>
+<p>编辑～/.config/ranger/rc.conf，加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set preview_images true</span><br><span class="line">map &lt;C-f&gt; fzf_select</span><br><span class="line">map DD shell mv %s &#x2F;home&#x2F;$&#123;USER&#125;&#x2F;.local&#x2F;share&#x2F;Trash&#x2F;files&#x2F;</span><br></pre></td></tr></table></figure>
+<p>安装<strong>highlight</strong>进行代码高亮提示。</p>
+<p>ranger有几款<a href="https://github.com/ranger/ranger/wiki/Plugins" target="_blank" rel="noopener">插件</a>也很不错，可以自行安装。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/03/02/xterm%E4%B8%8Euxterm%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/">xterm与uxterm字体设置</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-02
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>由于我使用的xubuntu中自带两个模拟终端：xterm与uxterm，这个两个终端默认使用时字体偏小，并且<br>不支持中文。解决方法是，编辑当前用户的配置文件 <strong>vim  ~/.Xdefaults</strong>，增加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">! TrueType font</span><br><span class="line">UXTerm*faceName: DejaVu Sans Mono</span><br><span class="line">XTerm*faceName: DejaVu Sans Mono</span><br><span class="line">! Chinese</span><br><span class="line">UXTerm*faceNameDoublesize: Noto Sans CJK SC</span><br><span class="line">XTerm*faceNameDoublesize: Noto Sans CJK SC</span><br><span class="line">! font size</span><br><span class="line">UXTerm*faceSize: 10</span><br><span class="line">XTerm*faceSize: 10</span><br><span class="line">! color</span><br><span class="line">UXTerm*background: black</span><br><span class="line">UXTerm*foreground: lightgreen</span><br><span class="line">XTerm*background: black</span><br><span class="line">XTerm*foreground: lightgreen</span><br><span class="line"></span><br><span class="line">UXTerm*geometry: 120x35+500+250</span><br><span class="line">UXTerm*metaSendsEscape: true</span><br><span class="line">UXTerm*eightBitInput: false</span><br><span class="line">UXTerm*selectToClipboard: true</span><br><span class="line">UXTerm*locale: zh_CN.UTF-8</span><br><span class="line">Uxterm*utf8: true</span><br><span class="line">Uxterm*utf8Title: true</span><br><span class="line"></span><br><span class="line">XTerm*geometry: 120x35+500+250</span><br><span class="line">XTerm*metaSendsEscape: true</span><br><span class="line">XTerm*eightBitInput: false</span><br><span class="line">XTerm*selectToClipboard: true</span><br><span class="line">XTerm*locale: zh_CN.UTF-8</span><br><span class="line">xterm*utf8: true</span><br><span class="line">xterm*utf8Title: true</span><br></pre></td></tr></table></figure>
+<p>然后保存退出，执行 <strong>xrdb  .Xdefaults</strong>，这样字体就都修改好了！</p>
+<p><strong>注意</strong>：有些GNU/Linux发行版桌面环境是读取 .Xresources文件，所以当注销后，.Xdefaults不起作用时可以</p>
+<p> mv  ~/.Xdefault  ~/.Xresources 修改配置文件名称后注销再登录。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/02/26/Neovim%E5%9C%A8Windows%E4%B8%8B%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE/">Neovim在Windows下如何配置</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-26
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p><a href="https://neovim.io/" target="_blank" rel="noopener">Neovim</a>是一个精简而又现代的vim编辑器，兼容vim脚本，在Windows上<a href="https://github.com/neovim/neovim/releases/download/v0.3.4/nvim-win64.zip" target="_blank" rel="noopener">下载</a>后，解压zip，将Neovim拷贝到一个固定的文件夹(这里我拷贝到C:\Program，在当前用户 C:\Users\yangxuan\AppData\Local\nvim\目录下增加配置文件init.vim，在init.vim添加</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">nu</span></span><br><span class="line"><span class="keyword">colorscheme</span> delek</span><br></pre></td></tr></table></figure>
+<p>加入Python3支持，<a href="https://npm.taobao.org/mirrors/python/" target="_blank" rel="noopener">下载</a>Python3进行安装，cmd或者powershell运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install neovim</span><br></pre></td></tr></table></figure>
+
+<p>一个Windows下的Neovim就配置完成了！</p>
+<p>推荐一个<a href="https://github.com/Yggdroot/LeaderF" target="_blank" rel="noopener">模糊搜索插件</a>，利用Python，加快搜索文件，函数名称，缓存。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          <a class="post-link" href="/2019/02/25/wine%E5%AE%89%E8%A3%85%E5%90%8E%E5%BF%85%E9%A1%BB%E8%A6%81%E5%81%9A%E7%9A%84%E4%BA%8B/">wine安装后必须要做的事</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-25
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <p>​    GNU/Linux的发行版中，我使用的是xubuntu，在GNU/Linux环境下开发是完全可以的。</p>
+<p>​    但是由于国内的沟通聊天软件仅限于QQ、微信，所以必须在xubuntu上安装<a href="https://www.winehq.org/" target="_blank" rel="noopener">wine</a>。利用一个国内软件开发者集成的安装环境<a href="https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu" target="_blank" rel="noopener">参照方法</a>，安装TIM与微信。</p>
+<p>​    安装完成的wine在启动winecfg或者是安装一些中文软件时，中文显示会出现方块乱码的情况，是因为在当前的wine不包含一个中文字体，需要下载中文字体，例如：<a href="https://dl.pconline.com.cn/download/367689-1.html" target="_blank" rel="noopener">宋体simsun</a>复制到 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~&#x2F;.wine&#x2F;drive_c&#x2F;windows&#x2F;Fonts&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>​    这样中文乱码的问题就解决了。</p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    
+    
+      <a class="next" href="/page/2/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+          </div>
+          
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:yangxuanx@outlook.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://twitter.com/yangxuanx" target="_blank" rel="noopener" class="iconfont icon-twitter" title="twitter"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/yangxuanx" target="_blank" rel="noopener" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even" target="_blank" rel="noopener">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">yangxuanx</span>
+  </span>
+</div>
+<div>
+    <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0vggoqqhnud&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>

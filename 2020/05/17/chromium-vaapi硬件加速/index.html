@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="chromium-vaapi硬件加速"/>
+
+
+
+
+  <meta name="keywords" content="Java" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yangxuanx's Blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://yangxuanx.github.io/2020/05/17/chromium-vaapi硬件加速/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> chromium-vaapi硬件加速 - yangxuanx's Blog </title>
+  <meta name="generator" content="Hexo 4.2.1"></head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">yangxuanx's Blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">yangxuanx's Blog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          chromium-vaapi硬件加速
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-05-17
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#硬件加速"><span class="toc-text">硬件加速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux下的浏览器"><span class="toc-text">Linux下的浏览器</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h3 id="硬件加速"><a href="#硬件加速" class="headerlink" title="硬件加速"></a>硬件加速</h3><p>  硬件加速在智能手机上很常见，可以使用手机处理器中的GPU对播放视频进行硬件解码，相比软件解码，耗电低，手机不易发烫。</p>
+<h3 id="Linux下的浏览器"><a href="#Linux下的浏览器" class="headerlink" title="Linux下的浏览器"></a>Linux下的浏览器</h3><p>  众所周知Linux下的Chromium Chrome Firefox都没有开启视频播放硬件加速。得益于Chromium的开源，有人做出了对VA-API支持的chromimu-vaapi，前段时间我已将自己的笔记本重装为Arch Linux，安装chromium-vaapi变得简单。</p>
+<ol>
+<li><p>添加archlinuxcn源，可以选择一个国内镜像，例如163</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo echo &quot;[archlinuxcn]</span><br><span class="line">Server &#x3D; http:&#x2F;&#x2F;mirrors.163.com&#x2F;archlinux-cn&#x2F;$arch&quot; &gt;&gt; &#x2F;etc&#x2F;pacman.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装archlinuxcn的PGP Keys</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装chromium、驱动、检测VA-API工具 ，由于我的笔记本CPU是ADM安装是这样的，Intel可以参照<a href="https://wiki.archlinux.org/index.php/Hardware_video_acceleration#Installation" target="_blank" rel="noopener">ArchlWiki</a>相对应的方法安装必要的驱动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S chromium-vaapi libva-mesa-driver libva-utils</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行vainfo命令，查看输出，VA-API是否工作正常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">vainfo: VA-API version: 1.7 (libva 2.7.1)</span><br><span class="line">vainfo: Driver version: Mesa Gallium driver 20.0.7 for AMD RAVEN (DRM 3.36.0, 5.6.13-arch1-1, LLVM 10.0.0)</span><br><span class="line">vainfo: Supported profile and entrypoints</span><br><span class="line">      VAProfileMPEG2Simple            :	VAEntrypointVLD</span><br><span class="line">      VAProfileMPEG2Main              :	VAEntrypointVLD</span><br><span class="line">      VAProfileVC1Simple              :	VAEntrypointVLD</span><br><span class="line">      VAProfileVC1Main                :	VAEntrypointVLD</span><br><span class="line">      VAProfileVC1Advanced            :	VAEntrypointVLD</span><br><span class="line">      VAProfileH264ConstrainedBaseline:	VAEntrypointVLD</span><br><span class="line">      VAProfileH264ConstrainedBaseline:	VAEntrypointEncSlice</span><br><span class="line">      VAProfileH264Main               :	VAEntrypointVLD</span><br><span class="line">      VAProfileH264Main               :	VAEntrypointEncSlice</span><br><span class="line">      VAProfileH264High               :	VAEntrypointVLD</span><br><span class="line">      VAProfileH264High               :	VAEntrypointEncSlice</span><br><span class="line">      VAProfileHEVCMain               :	VAEntrypointVLD</span><br><span class="line">      VAProfileHEVCMain               :	VAEntrypointEncSlice</span><br><span class="line">      VAProfileHEVCMain10             :	VAEntrypointVLD</span><br><span class="line">      VAProfileJPEGBaseline           :	VAEntrypointVLD</span><br><span class="line">      VAProfileVP9Profile0            :	VAEntrypointVLD</span><br><span class="line">      VAProfileVP9Profile2            :	VAEntrypointVLD</span><br><span class="line">      VAProfileNone                   :	VAEntrypointVideoProc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开chromium，输入chrome://flags，开启<a href="chrome://flags/#ignore-gpu-blacklist">#ignore-gpu-blacklist</a>，开启后会提示重启chromium，重启即可。</p>
+</li>
+<li><p>由于YouTube的视频默认输出为 VP8/VP9，需要安装扩展<a href="https://chrome.google.com/webstore/detail/h264ify/aleakchihdccplidncghkekgioiakgal" target="_blank" rel="noopener">h264ify</a></p>
+</li>
+<li><p>打开 chrome://gpu 查看Video Decode是否为Hardware accelerated，打开YouTube播放一个视频，打开 chrome://media-internals  查看Player Properties 中的video_decoder</p>
+<ul>
+<li>硬件解码: <em>MojoVideoDecoder</em>, <em>GpuVideoDecoder</em>;</li>
+<li>软件解码: <em>VpxVideoDecoder</em>, <em>FFmpegVideoDecoder</em>.</li>
+</ul>
+</li>
+</ol>
+<p>这里描述的相关操作来自于<a href="https://wiki.archlinux.org/index.php/Chromium#Hardware_video_acceleration" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Chromium#Hardware_video_acceleration</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/chromium/">chromium</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2020/04/01/%E5%88%A9%E7%94%A8mpv%E8%A7%82%E7%9C%8B%E6%96%97%E9%B1%BC%E7%9B%B4%E6%92%AD/">
+        <span class="next-text nav-default">利用mpv观看斗鱼直播</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:yangxuanx@outlook.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://twitter.com/yangxuanx" target="_blank" rel="noopener" class="iconfont icon-twitter" title="twitter"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/yangxuanx" target="_blank" rel="noopener" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even" target="_blank" rel="noopener">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">yangxuanx</span>
+  </span>
+</div>
+<div>
+    <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=0vggoqqhnud&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
