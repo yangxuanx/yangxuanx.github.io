@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="ArchLinux全局菜单开启"/>
+  <meta name="description" content="linux-zen"/>
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://yangxuanx.github.io/2019/08/23/ArchLinux全局菜单开启/"/>
+<link rel="canonical" href="https://yangxuanx.github.io/2020/05/19/linux-zen/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
@@ -79,7 +79,7 @@
 
 
 
-    <title> ArchLinux全局菜单开启 - yangxuanx's Blog </title>
+    <title> linux-zen - yangxuanx's Blog </title>
   <meta name="generator" content="Hexo 4.2.1"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -177,13 +177,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          ArchLinux全局菜单开启
+          linux-zen
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2019-08-23
+          2020-05-19
         </span>
         
         
@@ -195,8 +195,25 @@
 
     <div class="post-content">
       
-        <p>最近将自己使用的操作系统由之前的Ubuntu切换到ArchLinux，pacman的好处自然不用说。由于之前使用的桌面环境是xfce4，也有全局菜单，但是xfce4全局菜单组件依赖有内存泄露问题。更换ArchLinux后桌面环境选择了KDE，为了配合KDE下全局菜单使用，需要安装一些依赖，Firefox安装archlinuxcn源下firefox-kde-opensuse，这样Firefox也可以开启全局菜单，依赖包安装执行命令如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S appmenu-gtk-module libdbusmenu-glib libdbusmenu-gtk3 libdbusmenu-gtk2</span><br></pre></td></tr></table></figure>
+        <p>  最近将自己的笔记本电脑（联想小新13pro锐龙版）操作系统由原先的Pop!_OS替换为Arch Linux，Arch Linux默认内核是Linux的主线内核，不过在Arch Linux仓库中，有一个linux-zen内核，有关介绍在<a href="https://liquorix.net" target="_blank" rel="noopener">这里</a>，安装很简单，操作如下。</p>
+<ol>
+<li><p>安装 Zen Kernel</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S linux-zen linux-zen-headers</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>grub引导</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grub-mkconfig -o &#x2F;boot&#x2F;grub&#x2F;grub.cfg</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>systemd-boot引导。首先新增一个zen的配置文件，我的笔记本CPU是AMD，已经安amd-ucode，如果是Intel，安装intel-ucode，修改为intel-ucode.img，PARTUUID需要修改为当前电脑实际的PARTUUID值，可以执行 <em>sudo blkid</em> 进行查看。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;title          Arch Linux Zen</span><br><span class="line">linux          &#x2F;vmlinuz-linux-zen</span><br><span class="line">initrd         &#x2F;initramfs-linux-zen.img</span><br><span class="line">initrd         &#x2F;amd-ucode.img</span><br><span class="line">options        root&#x3D;PARTUUID&#x3D;xxxxxx rw&quot; &gt;&gt; &#x2F;boot&#x2F;loader&#x2F;entries&#x2F;zen.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改/boot/loader/loader.conf，将default对于的值修改为zen，因为原有主线内核保留，可以在systemd-boot引导开始时选择不同的内核启动系统。</p>
+</li>
+</ol>
+<p><em>相关ArchWiki</em>:</p>
+<p><em><a href="https://wiki.archlinux.org/index.php/kernel" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/kernel</a></em></p>
+<p><em><a href="https://wiki.archlinux.org/index.php/GRUB" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/GRUB</a></em></p>
+<p><em><a href="https://wiki.archlinux.org/index.php/Systemd-boot" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Systemd-boot</a></em></p>
+
       
     </div>
 
@@ -223,15 +240,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2019/08/24/Docker%E5%AE%B9%E5%99%A8%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Docker容器安装MySQL数据库</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2019/07/07/Linux%E5%AE%89%E8%A3%85JDK11/">
-        <span class="next-text nav-default">Linux安装JDK11</span>
+      <a class="next" href="/2020/05/17/chromium-vaapi%E7%A1%AC%E4%BB%B6%E5%8A%A0%E9%80%9F/">
+        <span class="next-text nav-default">chromium-vaapi硬件加速</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>

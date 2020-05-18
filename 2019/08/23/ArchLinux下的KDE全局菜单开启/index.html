@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="菜鸟一枚"/>
+  <meta name="description" content="ArchLinux下的KDE全局菜单开启"/>
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://yangxuanx.github.io/archives/2019/07/"/>
+<link rel="canonical" href="https://yangxuanx.github.io/2019/08/23/ArchLinux下的KDE全局菜单开启/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
@@ -79,11 +79,7 @@
 
 
 
-    <title>
-  
-    归档 - yangxuanx's Blog
-  
-</title>
+    <title> ArchLinux下的KDE全局菜单开启 - yangxuanx's Blog </title>
   <meta name="generator" content="Hexo 4.2.1"></head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -177,55 +173,84 @@
           <div id="content" class="content">
             
   
-  <section id="archive" class="archive">
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          ArchLinux下的KDE全局菜单开启
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-08-23
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        <p>最近将自己使用的操作系统由之前的Ubuntu切换到ArchLinux，pacman的好处自然不用说。由于之前使用的桌面环境是xfce4，也有全局菜单，但是xfce4全局菜单组件依赖有内存泄露问题。更换ArchLinux后桌面环境选择了KDE，为了配合KDE下全局菜单使用，需要安装一些依赖，Firefox安装archlinuxcn源下firefox-kde-opensuse，这样Firefox也可以开启全局菜单，依赖包安装执行命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S appmenu-gtk-module libdbusmenu-glib libdbusmenu-gtk3 libdbusmenu-gtk2</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
     
       
-        <div class="archive-title">
-          <span class="archive-post-counter">
-            目前共计 18 篇日志
-          </span>
-        </div>
+      
+
+
+
+      
       
     
 
     
-      
+      <footer class="post-footer">
         
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2019</h2>
+          <div class="post-tags">
+            
+              <a href="/tags/Linux/">Linux</a>
+            
           </div>
         
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            07-07
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/07/07/Linux%E5%AE%89%E8%A3%85JDK11/" class="archive-post-link">
-            Linux安装JDK11
-          </a>
-        </span>
-      </div>
+        
+        
+  <nav class="post-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
+      <a class="prev" href="/2019/08/24/Docker%E5%AE%B9%E5%99%A8%E5%AE%89%E8%A3%85MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Docker容器安装MySQL数据库</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
+    
+      <a class="next" href="/2019/07/07/Linux%E5%AE%89%E8%A3%85JDK11/">
+        <span class="next-text nav-default">Linux安装JDK11</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
@@ -315,6 +340,11 @@
     </div>
 
     
+  
+  
+
+  
+
 
 
     
